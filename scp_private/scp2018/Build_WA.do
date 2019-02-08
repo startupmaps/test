@@ -48,7 +48,7 @@ global mergetempsuffix="WA_Official"
 
     //add addresses
     merge m:1 ubi using WA.addresses.dta
-    drop if _merge == 2
+    drop if _merge == 1
     drop _merge
     
     tostring ubi, replace
@@ -61,7 +61,7 @@ global mergetempsuffix="WA_Official"
     
     replace state = "WA" if trim(state) == "" & jurisdiction == "WA"
     
-    replace state = trim(state)
+    replace state == trim(state)
     gen stateaddress = state
     gen local_firm = stateaddress == "WA"
     
@@ -120,16 +120,15 @@ global mergetempsuffix="WA_Official"
 	corp_add_industry_dummies , ind(/NOBACKUP/scratch/share_scp/ext_data/industry_words.dta) dta(WA.dta)
 
 	corp_add_industry_dummies , ind(/NOBACKUP/scratch/share_scp/ext_data/VC_industry_words.dta) dta(WA.dta)
-	
-	u WA.dta, clear
+
 	corp_add_gender, dta(WA.dta) directors(WA.directors.dta) names(~/ado/names/NATIONAL.TXT) precision(1)
 	corp_add_eponymy, dtapath(WA.dta) directorpath(WA.directors.dta)
 	
 	# delimit ;
 	corp_add_trademarks WA , 
 		dta(WA.dta) 
-		trademarkfile(/NOBACKUP/scratch/share_scp/ext_data/2018dta/trademarks/trademarks.dta) 
-		ownerfile(/NOBACKUP/scratch/share_scp/ext_data/2018dta/trademarks/trademark_owner.dta)
+		trademarkfile(/NOBACKUP/scratch/share_scp/ext_data/trademarks.dta) 
+		ownerfile(/NOBACKUP/scratch/share_scp/ext_data/trademark_owner.dta)
 		var(trademark) 
 		frommonths(-12)
 		tomonths(12)
@@ -139,16 +138,15 @@ global mergetempsuffix="WA_Official"
 	# delimit ;
 	corp_add_patent_applications WA WASHINGTON , 
 		dta(WA.dta) 
-		pat(/NOBACKUP/scratch/share_scp/ext_data/2018dta/patent_applications/patent_applications.dta) 
+		pat(/NOBACKUP/scratch/share_scp/ext_data/patent_applications.dta) 
 		var(patent_application) 
 		frommonths(-12)
 		tomonths(12)
 		statefileexists;
 	
-	
 	corp_add_patent_assignments  WA WASHINGTON , 
 		dta(WA.dta)
-		pat("/NOBACKUP/scratch/share_scp/ext_data/2018dta/patent_assignments/patent_assignments.dta")
+		pat("/NOBACKUP/scratch/share_scp/ext_data/patent_assignments.dta" "/NOBACKUP/scratch/share_scp/ext_data/patent_assignments2.dta" "/NOBACKUP/scratch/share_scp/ext_data/patent_assignments3.dta")
 		frommonths(-12)
 		tomonths(12)
 		var(patent_assignment)
@@ -159,20 +157,15 @@ global mergetempsuffix="WA_Official"
 		
 		
 	# delimit cr	
-	corp_add_ipos	 WA  ,dta(WA.dta) ipo(/NOBACKUP/scratch/share_scp/ext_data/ipoallUS.dta) longstate(WASHINGTON)
-	
-	corp_add_mergers WA  ,dta(WA.dta) merger(/NOBACKUP/scratch/share_scp/ext_data/2018dta/mergers/mergers_2018.dta)  longstate(WASHINGTON) 
-	replace targetsic = trim(targetsic)
-	foreach var of varlist equityvalue mergeryear mergerdate{
-	rename `var' `var'_new
-	}
-	corp_add_vc 	 WA  ,dta(WA.dta) vc(/NOBACKUP/scratch/share_scp/ext_data/VX.dta) longstate(WASHINGTON)
+	// corp_add_ipos	 WA  ,dta(WA.dta) ipo(/NOBACKUP/scratch/share_scp/ext_data/ipoallUS.dta) longstate(WASHINGTON)
+	corp_add_mergers WA  ,dta(WA.dta) merger(/NOBACKUP/scratch/share_scp/ext_data/mergers.dta) longstate(WASHINGTON)
+
+	// corp_add_vc 	 WA  ,dta(WA.dta) vc(/NOBACKUP/scratch/share_scp/ext_data/VX.dta) longstate(WASHINGTON)
 
  
 clear
 u WA.dta
 gen is_DE = jurisdiction == "DE"
-safedrop shortname
 gen  shortname = wordcount(entityname) <= 3
  save WA.dta, replace
 

@@ -99,7 +99,6 @@ save VA.directors.dta, replace
 **		and very similar to the ones used in "Where Is Silicon Valley?"
 **
 **	
-clear
 	u VA.dta , replace
 	tomname entityname
 	save VA.dta, replace
@@ -107,15 +106,15 @@ clear
 	corp_add_eponymy, dtapath(VA.dta) directorpath(VA.directors.dta)
 
 
-       corp_add_industry_dummies , ind(/NOBACKUP/scratch/share_scp/ext_data/industry_words.dta) dta(VA.dta)
-	corp_add_industry_dummies , ind(/NOBACKUP/scratch/share_scp/ext_data/VC_industry_words.dta) dta(VA.dta)
+       corp_add_industry_dummies , ind(~/ado/industry_words.dta) dta(VA.dta)
+	corp_add_industry_dummies , ind(~/ado/VC_industry_words.dta) dta(VA.dta)
 	
 	
 	# delimit ;
 	corp_add_trademarks VA , 
 		dta(VA.dta) 
-		trademarkfile(/NOBACKUP/scratch/share_scp/ext_data/2018dta/trademarks/trademarks.dta) 
-		ownerfile(/NOBACKUP/scratch/share_scp/ext_data/2018dta/trademarks/trademark_owner.dta)
+		trademarkfile(/projects/reap.proj/data/trademarks.dta) 
+		ownerfile(/projects/reap.proj/data/trademark_owner.dta)
 		var(trademark) 
 		frommonths(-12)
 		tomonths(12)
@@ -125,7 +124,7 @@ clear
 	# delimit ;
 	corp_add_patent_applications VA VIRGINIA , 
 		dta(VA.dta) 
-		pat(/NOBACKUP/scratch/share_scp/ext_data/2018dta/patent_applications/patent_applications.dta) 
+		pat(/projects/reap.proj/data_share/patent_applications.dta) 
 		var(patent_application) 
 		frommonths(-12)
 		tomonths(12)
@@ -138,7 +137,7 @@ clear
 	
 	corp_add_patent_assignments  VA VIRGINIA , 
 		dta(VA.dta)
-		pat("/NOBACKUP/scratch/share_scp/ext_data/2018dta/patent_assignments/patent_assignments.dta")
+		pat("/projects/reap.proj/data_share/patent_assignments.dta" "/projects/reap.proj/data_share/patent_assignments2.dta"  "/projects/reap.proj/data_share/patent_assignments3.dta")
 		frommonths(-12)
 		tomonths(12)
 		var(patent_assignment)
@@ -147,10 +146,5 @@ clear
 
 	
 
-	corp_add_ipos	 VA  ,dta(VA.dta) ipo(/NOBACKUP/scratch/share_scp/ext_data/ipoallUS.dta)  longstate(VIRGINIA) 
-	corp_add_mergers VA  ,dta(VA.dta) merger(/NOBACKUP/scratch/share_scp/ext_data/2018dta/mergers/mergers_2018.dta)  longstate(VIRGINIA) 
-	replace targetsic = trim(targetsic)
-	foreach var of varlist equityvalue mergeryear mergerdate{
-	rename `var' `var'_new
-	}
-	corp_add_vc 	 WA  ,dta(WA.dta) vc(/NOBACKUP/scratch/share_scp/ext_data/VX.dta) longstate(VIRGINIA)
+	//corp_add_ipos	 VA  ,dta(VA.dta) ipo(/projects/reap.proj/data/ipoallUS.dta)  longstate(VIRGINIA) 
+	corp_add_mergers VA  ,dta(VA.dta) merger(/projects/reap.proj/data/mergers.dta)  longstate(VIRGINIA) 

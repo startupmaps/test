@@ -93,7 +93,7 @@ set more off
 global output_suffix 
 global skip_states_in_indexes 
 
-log using output/Master_rnr_$output_suffix.log, text name(masterlog) replace
+log using output/Master_$output_suffix.log, text name(masterlog) replace
 
 
 /*** Monte Carlo Process Parameters ***/

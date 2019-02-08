@@ -1,0 +1,24 @@
+dictionary using ~/data/Texas/02_TexasCorrect.txt{
+_column(1) str2 transaction_code %2s
+_column(3) str10 filing_number %10s
+_column(13) str2 status_id %2s
+_column(15) str2 corp_type_id %2s
+_column(17) str150 name %150s
+_column(167) str2 perpetual_flag %2s
+_column(169) str8 creation_date %8s
+_column(177) str8 expiration_date %8s
+_column(185) str8 inactive_date %8s
+_column(193) str8 formation_date %8s
+_column(201) str8 report_due_date %8s
+_column(209) str11 taxid %11s
+_column(220) str150 dba_name_or_fictitious_name %150s
+_column(370) str16 foreign_fein %16s
+_column(386) str4 foreign_state %4s
+_column(390) str64 foreign_country %64s
+_column(454) str8 foreign_formation_date %8s
+_column(462) str16 expiration_type %16s
+_column(478) str3 nonprofit_subtype_id %3s
+_column(481) str2 boc_flag %2s
+_column(483) str8 boc_date %8s
+_column(491) str70 filler %70s
+} 

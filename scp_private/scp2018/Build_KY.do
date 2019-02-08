@@ -16,6 +16,7 @@ save KY.dta, replace
 
 rename v9 type
 gen is_corp = 1 if regexm(type,"CO")
+
 replace is_corp = 0 if missing(is_corp)
 drop if regexm(type,"NP")
 
@@ -35,10 +36,9 @@ gen shortname = wordcount(entityname) < 4
 rename v8 jurisdiction 
 replace jurisdiction = "KY" if missing(jurisdiction) 
 replace jurisdiction = trim(itrim(upper(jurisdiction)))
-keep if inlist(jurisdiction, "DE", "KY")
 gen is_DE = 1 if jurisdiction == "DE"
 
-gen local_firm= inlist(jurisdiction,"KY","DE") | state == "KY" 
+gen local_firm= inlist(jurisdiction,"KY") | jurisdiction == "DE" 
 
 /* Generating Variables */
 

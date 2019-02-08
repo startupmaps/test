@@ -1,0 +1,12 @@
+dictionary using ~/projects/reap_proj/raw_data/Arizona/corext.txt { 
+	   _column(65) str8 dataid %9s
+	   _column(74) str58 entityname %58s
+	   _column(312) str8 incdate %8s
+	   _column(486) str2 jurisdiction %2s
+	   _column(746) str89 address %89s
+	   _column(837) str20 city %20s
+	   _column(857) str2 state %2s
+	   _column(859) str5 zipcode %5s
+
+	   _column(484) str1 corptype %1s
+}

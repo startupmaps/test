@@ -1,0 +1,11 @@
+dictionary using ~/data/Texas/02_TexasCorrect.txt{
+_column(1) str8 dataid %8s
+_column(9) str250 corpname %250s
+_column(501) str50 address1 %50s
+_column(589) str50 city %50s
+_column(639) str2 state %2s
+_column(641) str50 zipcode %50s
+_column(1758) str10 startdate %10s
+_column(1794) str10 enddate %10s
+
+} 

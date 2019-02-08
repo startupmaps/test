@@ -1,0 +1,13 @@
+dictionary using "~/projects/reap_proj/raw_data/Wisconsin2/Wisconsin_Formatted.txt" {
+    _column(1)	 		str70 entityname %70s
+    _column(75) 		str8 dataid %8s
+    _column(82) 		str22 corptype %22s
+    _column(90) 		str2 jurisdiction %2s
+    _column(105) 		str10 incdate %10s
+    _column(134) 		str38 regagent %38s
+    _column(173) 		str33 address %33s
+    _column(206) 		str31 city %31s
+    _column(238) 		str2 state %2s
+    _column(241) 		str5 zipcode %5s
+
+}    

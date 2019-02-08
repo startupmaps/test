@@ -1,0 +1,12 @@
+dictionary using ~/data/Texas/03_TexasCorrect.txt{
+_column(1) str2 transaction_code %2s
+_column(3) str10 filing_number %10s
+_column(13) str50 address1 %50s
+_column(63) str50 address2 %50s
+_column(113) str64 city %64s
+_column(177) str4 state %4s
+_column(181) str9 zip_code %9s
+_column(190) str6 zip_extension %6s
+_column(196) str64 country %64s
+_column(260) str301 filler %301s
+}

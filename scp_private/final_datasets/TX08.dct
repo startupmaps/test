@@ -1,0 +1,9 @@
+dictionary using /projects/reap.proj/raw_data/Texas/08.Texas.Officers.txt{
+	_column(3) str10 filingnumber %10s
+	_column(260) str6 officerid %6s
+	_column(266) str32 officertitle %32s
+	_column(298) str50 lastname %50s
+	_column(348) str50 firstname %50s
+	_column(398) str50 middlename %50s	
+
+}

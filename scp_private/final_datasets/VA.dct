@@ -1,0 +1,12 @@
+dictionary using ~/data/Virginia/2_corporations.csv{
+_column(3) str7 dataid %7s
+_column(10) str100 entityname %100s
+_column(128) str8 incdate  %8s
+_column(136) str2 jurisdiction %2s
+_column(140) str45 address1 %45s
+_column(184) str45 address2 %45s
+_column(230) str23 city %23s
+_column(253) str2 state %2s
+_column(255) str10 zipcode %10s
+
+} 

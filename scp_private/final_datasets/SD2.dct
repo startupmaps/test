@@ -1,0 +1,12 @@
+dictionary using ~/projects/reap_proj/raw_data/South_Dakota/st02d89.txt{
+_column(1) str8 dataid %8s
+_column(12) str10 startdate %10s
+_column(23) str77 entityname %77s
+_column(23) str1 address1 %1s
+_column(23) str1 jurisdiction %1s
+_column(53) str1 city %1s
+_column(23) str1 zipcode %1s
+_column(23) str1 enddate %1s
+_column(23) str1 state %1s
+
+} 

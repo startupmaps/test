@@ -216,13 +216,9 @@ duplicates drop
 		statefileexists;
 	
 	# delimit cr	
-	corp_add_ipos	 NY ,dta(NY.dta) ipo(/NOBACKUP/scratch/share_scp/ext_data/ipoallUS.dta) longstate(NEW YORK)
-	corp_add_mergers NY  ,dta(NY.dta) merger(/NOBACKUP/scratch/share_scp/ext_data/2018dta/mergers/mergers_2018.dta)  longstate(NEW YORK) 
-	replace targetsic = trim(targetsic)
-	foreach var of varlist equityvalue mergeryear mergerdate{
-	rename `var' `var'_new
-	}
-	corp_add_vc 	 NY ,dta(NY.dta) vc(/NOBACKUP/scratch/share_scp/ext_data/VX.dta) longstate(NEW YORK)
+	// corp_add_ipos	 NY ,dta(NY.dta) ipo(/NOBACKUP/scratch/share_scp/ext_data/ipoallUS.dta) longstate(NEW YORK)
+	corp_add_mergers NY ,dta(NY.dta) merger(/NOBACKUP/scratch/share_scp/ext_data/2018dta/mergers.dta)  longstate(NEW YORK)
+	// corp_add_vc 	 NY ,dta(NY.dta) vc(/NOBACKUP/scratch/share_scp/ext_data/VX.dta) longstate(NEW YORK)
 
 
 

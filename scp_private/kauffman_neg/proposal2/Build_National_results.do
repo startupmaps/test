@@ -1,7 +1,7 @@
 
 capture log close
 
-log using output/Build_National_results.log, replace text
+log using ~/kauffman_neg/output/Build_National_results.log, replace text
 
 
 capture program drop univariate
@@ -10,7 +10,7 @@ capture program drop build_model
 capture program drop build_robustness_model
 
 
-
+cd ~/kauffman_neg
 clear
 u $datafile
 
@@ -21,18 +21,6 @@ save $datafile,replace
 
 safedrop obs
 gen obs = 1
-
-capture confirm variable growthz
-if _rc != 0 {
-    /** This is where the right growth variable is assigned.  Use:
-        -growthz_old = Original MIT SDC Dataset
-        - growthz_new = New Columbia SDC Dataset
-        - growthz_z = Zephyr dataset
-     **/
-    
-    gen growthz = growthz_new
-}
-
 label variable growthz "Growth"
 
 if $results_summary_stats == 1 {
@@ -69,25 +57,25 @@ if $build_model == 1 {
 
     if $build_model_preliminary == 1 {
         build_preliminary_model, fe(11)
-        esttab using output/RegressionModel_Intermediate_$output_suffix.csv, eform se pr2 replace
+        esttab using ~/kauffman_neg/output/RegressionModel_Intermediate_$output_suffix.csv, eform se pr2 replace
     }
 
     if $build_main_model == 1 {
         build_model, $model_params noestclear fe(11)  
-        esttab using output/RegressionModel$output_suffix.csv, eform se pr2 replace
+        esttab using ~/kauffman_neg/output/RegressionModel$output_suffix.csv, eform se pr2 replace
         save $datafile, replace
     }
 
     
     if $build_model_robustness == 1 {
         build_robustness_model, fe(11) 
-        esttab using output/RegressionModel_Robustness$output_suffix.csv, eform se pr2 replace
+        esttab using ~/kauffman_neg/output/RegressionModel_Robustness$output_suffix.csv, eform se pr2 replace
     }
 
 
     if $build_model_employment == 1 {
         build_employment_model, fe(11) 
-        esttab using output/RegressionModel_Employment$output_suffix.csv, eform se pr2 replace
+        esttab using ~/kauffman_neg/output/RegressionModel_Employment$output_suffix.csv, eform se pr2 replace
 
     }
 

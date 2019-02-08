@@ -121,7 +121,6 @@ save FL.dta, replace
 
 
 
-/*
 clear
 gen fullname = ""
 save FL.directors.dta, replace
@@ -146,11 +145,11 @@ forvalues i=1/5{
 	split fullname, limit(2)
 	rename (fullname1 fullname2) (firstname lastname)
 	
-	append using FL.directors.dta, force
+	append using ~/migration/datafiles/FL.directors.dta, force
 	save FL.directors.dta, replace
 }
 
-*/
+
 	u FL.dta
 	tomname entityname
 	drop if missing(dataid)
@@ -164,21 +163,22 @@ clear
 
 
 
-	corp_add_industry_dummies , ind(/NOBACKUP/scratch/share_scp/ext_data/industry_words.dta) dta(FL.dta)
-	corp_add_industry_dummies , ind(/NOBACKUP/scratch/share_scp/ext_data/VC_industry_words.dta) dta(FL.dta)
+	corp_add_industry_dummies , ind(~/nbercriw/industry_words.dta) dta(~/migration/datafiles/FL.dta)
+	corp_add_industry_dummies , ind(~/ado/VC_industry_words.dta) dta(~/migration/datafiles/FL.dta)
  
 
-*	corp_add_gender, dta(FL.dta) directors(FL.directors.dta) names(~/ado/names/NATIONAL.TXT)
+*	corp_add_gender, dta(~/migration/datafiles/FL.dta) directors(~/migration/datafiles/FL.directors.dta) names(~/ado/names/NATIONAL.TXT)
 
 	corp_add_eponymy, dtapath(FL.dta) directorpath(FL.directors.dta)
 	
-# delimit ;
+	# delimit ;
 	corp_add_trademarks FL , 
 		dta(FL.dta) 
-		trademarkfile(/NOBACKUP/scratch/share_scp/ext_data/2018dta/trademarks/trademarks.dta) 
-		ownerfile(/NOBACKUP/scratch/share_scp/ext_data/2018dta/trademarks/trademark_owner.dta)
+		trademarkfile(/projects/reap.proj/data/trademarks.dta) 
+		ownerfile(/projects/reap.proj/data/trademark_owner.dta)
 		var(trademark) 
 		frommonths(-12)
+		classificationfile(/projects/reap.proj/data/trademarks/classification.dta)
 		tomonths(12)
 		statefileexists;
 	
@@ -186,39 +186,36 @@ clear
 	# delimit ;
 	corp_add_patent_applications FL FLORIDA , 
 		dta(FL.dta) 
-		pat(/NOBACKUP/scratch/share_scp/ext_data/2018dta/patent_applications/patent_applications.dta) 
+		pat(/projects/reap.proj/data_share/patent_applications.dta) 
 		var(patent_application) 
 		frommonths(-12)
 		tomonths(12)
 		statefileexists;
-	
 	# delimit ;
-
-/* No Observations */	
-	corp_add_patent_assignments  FL FLORIDA , 
+	
+	set trace on;
+	set tracedepth 1;
+	corp_add_patent_assignments  FL FLORIDA 
+		, 
 		dta(FL.dta)
-		pat("/NOBACKUP/scratch/share_scp/ext_data/2018dta/patent_assignments/patent_assignments.dta")
+		pat("/projects/reap.proj/data_share/patent_assignments.dta" "/projects/reap.proj/data_share/patent_assignments2.dta" )
 		frommonths(-12)
 		tomonths(12)
 		var(patent_assignment)
 		statefileexists;
+		
+
 	# delimit cr	
-	
-	corp_add_ipos	 FL ,dta(FL.dta) ipo(/NOBACKUP/scratch/share_scp/ext_data/ipoallUS.dta) longstate(FLORIDA)
-	corp_add_mergers FL  ,dta(FL.dta) merger(/NOBACKUP/scratch/share_scp/ext_data/2018dta/mergers/mergers_2018.dta)  longstate(FLORIDA) 
-	replace targetsic = trim(targetsic)
-	foreach var of varlist equityvalue mergeryear mergerdate{
-	rename `var' `var'_new
-	}
 
 
-	corp_add_vc FL ,dta(FL.dta) vc(/NOBACKUP/scratch/share_scp/ext_data/VX.dta) longstate(FLORIDA)
+	corp_add_ipos	 FL  ,dta(~/migration/datafiles/FL.dta) ipo(/projects/reap.proj/data/ipoallUS.dta)  longstate(FLORIDA) 
+	corp_add_mergers FL  ,dta(~/migration/datafiles/FL.dta) merger(/projects/reap.proj/data/mergers.dta)  longstate(FLORIDA) 
 
+
+ 
 
 clear
-u FL.dta
-safedrop is_DE
-safedrop shortname
+u ~/migration/datafiles/FL.dta
 gen is_DE = jurisdiction == "DE"
 gen  shortname = wordcount(entityname) <= 3
 

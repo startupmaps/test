@@ -1,0 +1,9 @@
+
+dictionary using /projects/reap.proj/raw_data/Texas/09.Texas.Names.txt{
+	_column(3) str10 filingnumber %10s
+	_column(19) str150 oldname %150s
+	_column(169) str3 namestatusid %3s
+	_column(172) str3 nametypeid %3s	
+	_column(175) str8 creationdatestr %8s	
+
+}

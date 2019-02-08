@@ -125,7 +125,7 @@ save VT.dta, replace
         
         # delimit cr    
         corp_add_ipos    VT ,dta(VT.dta) ipo(/NOBACKUP/scratch/share_scp/ext_data/ipoallUS.dta) longstate(VERMONT)
-        corp_add_mergers VT ,dta(VT.dta) merger(/NOBACKUP/scratch/share_scp/ext_data/2018dta/mergers/mergers_2018.dta) longstate(VERMONT)
+        corp_add_mergers VT ,dta(VT.dta) merger(/NOBACKUP/scratch/share_scp/ext_data/2018dta/mergers/mergers.pre2019.dta) longstate(VERMONT)
         corp_add_vc 	 VT ,dta(VT.dta) vc(/NOBACKUP/scratch/share_scp/ext_data/VX.dta) longstate(VERMONT)
 
         //corp_add_vc2     VT  ,dta(VT.dta) vc(VC.investors.withequity.dta)  longstate(VERMONT) dropexisting 

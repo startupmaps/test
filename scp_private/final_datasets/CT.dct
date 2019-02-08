@@ -1,0 +1,14 @@
+dictionary using ~/projects/reap_proj/raw_data/Connecticut/SSP/FOCUSA/BUSMAS1A/DATA.txt {
+	   _column(1) str2 record_type %2s
+	   _column(3) str7 dataid %7s
+	   _column(10) str1 corp_type %1s
+	   _column(11) str2 type2 %2s
+	   _column(254) str40 address1 %40s
+	   _column(294) str40 address2 %40s
+	   _column(334) str30 city %30s
+	   _column(364) str2 state %2s
+	   _column(366) str5 zipcode %5s
+	   _column(856) str100 entityname %100s
+	   _column(836) str8 incdatestr %8s
+}
+  
