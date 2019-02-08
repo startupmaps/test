@@ -1,4 +1,5 @@
-cd /NOBACKUP/scratch/share_scp/scp_private/final_datasets
+cd /NOBACKUP/scratch/share_scp/scp_private/final_datasets/
+set more off
 clear
 global mergetempsuffix ARMERGE
 global only_DE 0
