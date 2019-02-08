@@ -1,6 +1,8 @@
 cd /NOBACKUP/scratch/share_scp/scp_private/scp2018/
-global mergetempsuffix = "migration.AK"
 clear 
+global mergetempsuffix = "migration.AK"
+
+
 import delimited using /NOBACKUP/scratch/share_scp/raw_data/Alaska/2018/CorporationsDownload.CSV, delim(",") varnames(1)
 
 rename (entitynumber legalname) (dataid entityname)

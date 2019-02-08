@@ -1,9 +1,8 @@
 cd /NOBACKUP/scratch/share_scp/scp_private/final_datasets
+clear
 global mergetempsuffix ARMERGE
 global only_DE 0
 
-
-clear 
 import delimited using /NOBACKUP/scratch/share_scp/raw_data/Arkansas/corp_data.txt, delim(tab)
 
 rename v1 dataid
